@@ -1,40 +1,14 @@
-# Laravel 5 Full Calendar Helper
-
-[![Latest Stable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/stable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Total Downloads](https://poser.pugx.org/maddhatter/laravel-fullcalendar/downloads)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Latest Unstable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/unstable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![License](https://poser.pugx.org/maddhatter/laravel-fullcalendar/license)](https://packagist.org/packages/maddhatter/laravel-fullcalendar)
-
-***For Laravel 4.2: use the [laravel-4 branch](https://github.com/maddhatter/laravel-fullcalendar/tree/laravel-4)***
+# Laravel 7 Full Calendar Helper
 
 This is a simple helper package to make generating [http://fullcalendar.io](http://fullcalendar.io) in Laravel apps easier.
+
+Thanks to @maddhatter for the initial repo for laravel < 7 (https://github.com/maddhatter/laravel-fullcalendar)
 
 ## Installing
 Require the package with composer using the following command:
 
-    composer require maddhatter/laravel-fullcalendar
+    composer require acaronlex/laravel-calendar
 
-Or add the following to your composer.json's require section and `composer update`
-
-```json
-"require": {
-	"maddhatter/laravel-fullcalendar": "~1.0"
-}
-```
-
-### Laravel 5.4 (and earlier)
-
-Register the service provider in your `app.php` config file:
-
-```php
-Acaronlex\LaravelCalendar\ServiceProvider::class,
-```
-
-And optionally create an alias:
-
-```php
-'Calendar' => Acaronlex\LaravelCalendar\Facades\Calendar::class,
-
-```
-
-### Laravel 5.5+
 The provider and `Calendar` alias will be registered automatically.
 
 You will also need to include [fullcalendar.io](http://fullcalendar.io/)'s files in your HTML.
@@ -256,7 +230,3 @@ Then to display, add the following code to your View:
 **Note:** The output from `calendar()` and `script()` must be non-escaped, so use `{!!` and `!!}` (or whatever you've configured your Blade compiler's raw tag directives as).   
 
 The `script()` can be placed anywhere after `calendar()`, and must be after fullcalendar was included.
-
-This will generate (in February 2015):
-
-![](http://i.imgur.com/qjgVhCY.png)
