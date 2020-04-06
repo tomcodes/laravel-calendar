@@ -95,7 +95,7 @@ class Calendar
     {
         $options = $this->getOptionsJson();
 
-        return $this->view->make('fullcalendar::script', [
+        return $this->view->make('calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
@@ -162,7 +162,7 @@ class Calendar
     }
 
     /**
-     * Set fullcalendar options
+     * Set calendar options
      *
      * @param array $options
      * @return $this
@@ -175,7 +175,7 @@ class Calendar
     }
 
     /**
-     * Get the fullcalendar options (not including the events list)
+     * Get the calendar options (not including the events list)
      *
      * @return array
      */
@@ -185,7 +185,7 @@ class Calendar
     }
 
     /**
-     * Set fullcalendar callback options
+     * Set calendar callback options
      *
      * @param array $callbacks
      * @return $this

@@ -12,14 +12,14 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->app->bind('laravel-fullcalendar', function ($app) {
+        $this->app->bind('laravel-calendar', function ($app) {
             return $app->make('Acaronlex\LaravelCalendar\Calendar');
         });
     }
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../views/', 'fullcalendar');
+        $this->loadViewsFrom(__DIR__ . '/../../views/', 'calendar');
     }
 
     /**
@@ -29,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['laravel-fullcalendar'];
+        return ['laravel-calendar'];
     }
 
 }
