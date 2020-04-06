@@ -19,7 +19,7 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../views/', 'calendar');
+        $this->loadViewsFrom(__DIR__.'/views/', 'laravel-calendar');
     }
 
     /**

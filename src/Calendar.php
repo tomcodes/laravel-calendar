@@ -3,6 +3,8 @@
 use ArrayAccess;
 use DateTime;
 use Illuminate\View\Factory;
+use Illuminate\Support\Str;
+use View;
 
 class Calendar
 {
@@ -54,10 +56,9 @@ class Calendar
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
-    public function __construct(Factory $view, EventCollection $eventCollection)
+    public function __construct()
     {
-        $this->view            = $view;
-        $this->eventCollection = $eventCollection;
+        $this->eventCollection = new EventCollection();
     }
 
     /**
@@ -95,7 +96,7 @@ class Calendar
     {
         $options = $this->getOptionsJson();
 
-        return $this->view->make('calendar::script', [
+        return view('laravel-calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
@@ -126,7 +127,7 @@ class Calendar
             return $this->id;
         }
 
-        $this->id = str_random(8);
+        $this->id = Str::random(8);
 
         return $this->id;
     }
