@@ -2,7 +2,7 @@
 
 This is a simple helper package to make generating [http://fullcalendar.io](http://fullcalendar.io) in Laravel apps easier.
 
-Thanks to @maddhatter for the initial repo for laravel < 7 (https://github.com/maddhatter/laravel-fullcalendar)
+Thanks to [@maddhatter](https://github.com/orgs/VideoAmp/teams/team-name/members) for the [initial repo](https://github.com/maddhatter/laravel-fullcalendar) for laravel < 7
 
 ## Installing
 Require the package with composer using the following command:
