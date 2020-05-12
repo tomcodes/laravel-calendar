@@ -1,5 +1,9 @@
 <script>
     $(document).ready(function(){
-        $('#calendar-{{ $id }}').fullCalendar({!! $options !!});
+        var calendarEl = document.getElementById('calendar-{{ $id }}');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {!! $options !!});
+
+        calendar.render();
     });
 </script>
