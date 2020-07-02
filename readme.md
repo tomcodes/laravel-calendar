@@ -190,14 +190,23 @@ $events[] = \Calendar::event(
 
 $eloquentEvent = EventModel::first(); //EventModel implements Acaronlex\LaravelCalendar\Event
 
-$calendar = \Calendar::addEvents($events) //add an array with addEvents
-    ->addEvent($eloquentEvent, [ //set custom color fo this event
-        'color' => '#800',
-    ])->setOptions([ //set fullcalendar options
-		'firstDay' => 1
-	])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-        'viewRender' => 'function() {alert("Callbacks!");}'
-    ]);
+$calendar = new Calendar();
+        $calendar->addEvents($events)
+        ->setOptions([
+            'locale' => 'fr',
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'timeGridWeek',
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+            ]
+        ]);
+        $calendar->setId('1');
+        $calendar->setCallbacks([
+            'select' => 'function(selectionInfo){}',
+            'eventClick' => 'function(event){}'
+        ]);
 
 return view('hello', compact('calendar'));
 ```
@@ -213,11 +222,11 @@ Then to display, add the following code to your View:
 <head>
     	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.4.0/main.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.4.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.0.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.0.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.0.0/main.min.js"></script>
 
-    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.4.0/main.min.css"/>
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.0.0/main.min.css"/>
 
 
     <style>
