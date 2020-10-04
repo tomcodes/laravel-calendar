@@ -1,4 +1,4 @@
-# Laravel 7 Full Calendar 5 Helper
+# Laravel 7 & 8 Full Calendar 5 Helper
 
 This is a simple helper package to make generating [http://fullcalendar.io](http://fullcalendar.io) in Laravel apps easier.
 
@@ -239,6 +239,6 @@ Then to display, add the following code to your View:
 </body>
 </html>
 ```
-**Note:** The output from `calendar()` and `script()` must be non-escaped, so use `{!!` and `!!}` (or whatever you've configured your Blade compiler's raw tag directives as).   
+**Note:** The output from `calendar()` and `script()` must be non-escaped, so use `{!!` and `!!}` (or whatever you've configured your Blade compiler's raw tag directives as).
 
 The `script()` can be placed anywhere after `calendar()`, and must be after fullcalendar was included.
