@@ -26,12 +26,17 @@ class Calendar
     protected $id;
 
     /**
+     * @var bool
+     */
+    protected $es6 = false;
+
+    /**
      * Default options array
      *
      * @var array
      */
     protected $defaultOptions = [
-        'initialView'=> 'dayGridMonth',
+        'initialView' => 'dayGridMonth',
         'height' => 'auto',
         'headerToolbar' => [
             'left' => 'prev,next today',
@@ -99,7 +104,7 @@ class Calendar
     {
         $options = $this->getOptionsJson();
 
-        return view('laravel-calendar::script', [
+        return view($this->getEs6() ? 'laravel-calendar::script-es6' : 'laravel-calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
@@ -133,6 +138,29 @@ class Calendar
         $this->id = Str::random(8);
 
         return $this->id;
+    }
+
+    /**
+     * change setting to output script in ES6 compatible format
+     *
+     * @param bool $value
+     * @return $this
+     */
+    public function setEs6(bool $value=true)
+    {
+        $this->es6 = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get the current ES6 value
+     *
+     * @return bool
+     */
+    public function getEs6()
+    {
+        return $this->es6;
     }
 
     /**
@@ -227,7 +255,7 @@ class Calendar
             $parameters['events'] = $this->eventCollection->toArray();
         }
 
-        $json = json_encode($parameters);
+        $json = $this->replaceKeys(json_encode($parameters, JSON_PRETTY_PRINT));
 
         if ($placeholders) {
             return $this->replaceCallbackPlaceholders($json, $placeholders);
@@ -271,5 +299,49 @@ class Calendar
         }
 
         return str_replace($search, $replace, $json);
+    }
+
+    /**
+     * Replace keys with non-JSON encoded values
+     *
+     * @param $json
+     * @return string
+     */
+    protected function replaceKeys($json)
+    {
+        $search  = [];
+        $replace = [];
+
+        foreach (json_decode($json) as $key => $value) {
+            // Stripping double quotes from plugins values
+            if(strtolower($key) === 'plugins' || strtolower($key) === 'locales'){
+                if(is_array($value)) {
+                    foreach ($value as $key) {
+                        $search[] = '"' . $key . '"';
+                        $replace[] = $key;
+                    }
+                }
+                else{
+                    $search[] = '"' . $value . '"';
+                    $replace[] = $value;
+                }
+            }
+
+            // Stripping double quotes from custom button callback option
+            if(strtolower($key) === 'custombuttons'){
+                foreach ($value as $key => $value) { // buttons
+                    foreach ($value as $key => $value) { // buttons options
+                        if(strtolower($key) === 'click'){
+                            $search[]  = json_encode($value);
+                            $replace[] = '' . $value . '';
+                        }
+                    }
+                }
+            }
+        }
+        $json = str_replace($search, $replace, $json);
+
+        return preg_replace('/"(.+)":/i', '${1}:', $json);
+
     }
 }
