@@ -5,6 +5,8 @@
         calendar = new FullCalendar.Calendar(calendarEl,
             {!! $options !!},
         );
-        calendar.render();
+        @if ($render)
+            calendar.render();
+        @endif
     });
 </script>

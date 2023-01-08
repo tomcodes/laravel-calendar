@@ -64,7 +64,7 @@ class Calendar
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
-    public function __construct()
+    public function __construct(public $render = true)
     {
         $this->eventCollection = new EventCollection();
     }
@@ -107,6 +107,7 @@ class Calendar
         return view($this->getEs6() ? 'laravel-calendar::script-es6' : 'laravel-calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
+            'render' => $this->render,
         ]);
     }
 
