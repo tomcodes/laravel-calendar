@@ -100,13 +100,14 @@ class Calendar
      *
      * @return \Illuminate\View\View
      */
-    public function script()
+    public function script($nonce = null)
     {
         $options = $this->getOptionsJson();
 
         return view($this->getEs6() ? 'laravel-calendar::script-es6' : 'laravel-calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
+            'nonce' => $nonce,
         ]);
     }
 
